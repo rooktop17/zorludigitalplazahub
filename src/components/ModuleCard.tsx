@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ExternalLink } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import type { Module } from "@/data/modules";
 
 interface ModuleCardProps {
@@ -9,41 +9,43 @@ interface ModuleCardProps {
 
 const ModuleCard = ({ module, index }: ModuleCardProps) => {
   const navigate = useNavigate();
-  const Icon = module.icon;
 
   return (
     <button
       onClick={() => navigate(`/module/${module.id}`)}
-      className="group relative flex flex-col gap-4 rounded-xl border border-border bg-card p-6 text-left transition-all duration-300 hover:bg-card-hover card-hover-glow"
-      style={{ animationDelay: `${index * 60}ms` }}
+      className="group relative flex flex-col items-center gap-4 rounded-2xl p-6 text-center card-premium"
+      style={{
+        animationDelay: `${index * 60}ms`,
+        animation: "fade-in 0.5s ease-out forwards",
+        opacity: 0,
+      }}
     >
-      {/* Icon */}
-      <div
-        className="flex h-12 w-12 items-center justify-center rounded-lg"
-        style={{ backgroundColor: `hsl(${module.color} / 0.12)` }}
-      >
-        <Icon
-          className="h-6 w-6 transition-transform duration-300 group-hover:scale-110"
-          style={{ color: `hsl(${module.color})` }}
+      {/* 3D Icon */}
+      <div className="relative w-20 h-20 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+        <img
+          src={module.icon3d}
+          alt={module.title}
+          width={80}
+          height={80}
+          loading="lazy"
+          className="w-20 h-20 object-contain drop-shadow-lg"
         />
       </div>
 
       {/* Content */}
-      <div className="flex-1">
-        <h3 className="font-heading text-lg font-semibold text-foreground mb-1">
+      <div className="flex-1 space-y-1.5">
+        <h3 className="font-heading text-base font-bold text-foreground">
           {module.title}
         </h3>
-        <p className="text-sm text-muted-foreground leading-relaxed">
+        <p className="text-xs text-muted-foreground leading-relaxed">
           {module.description}
         </p>
       </div>
 
-      {/* Category badge */}
-      <div className="flex items-center justify-between">
-        <span className="rounded-md bg-secondary px-2.5 py-1 text-xs font-medium text-secondary-foreground">
-          {module.category}
-        </span>
-        <ExternalLink className="h-4 w-4 text-muted-foreground opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      {/* Footer */}
+      <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors">
+        <span>Aç</span>
+        <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
       </div>
     </button>
   );
