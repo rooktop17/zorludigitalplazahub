@@ -13,12 +13,8 @@ const ModuleCard = ({ module, index }: ModuleCardProps) => {
   return (
     <button
       onClick={() => navigate(`/module/${module.id}`)}
-      className="group relative flex flex-col items-center gap-4 rounded-2xl p-6 text-center card-premium"
-      style={{
-        animationDelay: `${index * 60}ms`,
-        animation: "fade-in 0.5s ease-out forwards",
-        opacity: 0,
-      }}
+      className="group relative flex flex-col items-center gap-4 rounded-2xl p-6 text-center card-premium animate-fade-in opacity-0"
+      style={{ animationDelay: `${index * 60}ms` }}
     >
       {/* 3D Icon */}
       <div className="relative w-20 h-20 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
