@@ -65,7 +65,7 @@ export type Database = {
           surname: string
           total_leave: number
           used_leave: number
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           created_at?: string
@@ -78,7 +78,7 @@ export type Database = {
           surname: string
           total_leave?: number
           used_leave?: number
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           created_at?: string
@@ -91,7 +91,7 @@ export type Database = {
           surname?: string
           total_leave?: number
           used_leave?: number
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: []
       }
@@ -111,7 +111,7 @@ export type Database = {
           supplier_name: string | null
           total_amount: number
           updated_at: string
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           created_at?: string
@@ -128,7 +128,7 @@ export type Database = {
           supplier_name?: string | null
           total_amount?: number
           updated_at?: string
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           created_at?: string
@@ -145,7 +145,7 @@ export type Database = {
           supplier_name?: string | null
           total_amount?: number
           updated_at?: string
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: [
           {
@@ -280,7 +280,7 @@ export type Database = {
           paid_by: string
           payment_date: string
           payment_method: string
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           amount?: number
@@ -291,7 +291,7 @@ export type Database = {
           paid_by?: string
           payment_date?: string
           payment_method?: string
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           amount?: number
@@ -302,7 +302,7 @@ export type Database = {
           paid_by?: string
           payment_date?: string
           payment_method?: string
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: [
           {
@@ -407,7 +407,7 @@ export type Database = {
           status: string
           total_amount: number
           updated_at: string
-          user_id: string | null
+          user_id: string
           vat_included: boolean
           vat_rate: number
         }
@@ -426,7 +426,7 @@ export type Database = {
           status?: string
           total_amount?: number
           updated_at?: string
-          user_id?: string | null
+          user_id: string
           vat_included?: boolean
           vat_rate?: number
         }
@@ -445,7 +445,7 @@ export type Database = {
           status?: string
           total_amount?: number
           updated_at?: string
-          user_id?: string | null
+          user_id?: string
           vat_included?: boolean
           vat_rate?: number
         }
@@ -482,7 +482,7 @@ export type Database = {
           tax_amount: number
           total_refund: number
           updated_at: string
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           account_holder?: string | null
@@ -514,7 +514,7 @@ export type Database = {
           tax_amount?: number
           total_refund?: number
           updated_at?: string
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           account_holder?: string | null
@@ -546,7 +546,7 @@ export type Database = {
           tax_amount?: number
           total_refund?: number
           updated_at?: string
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: []
       }
@@ -725,7 +725,7 @@ export type Database = {
           notes: string | null
           phone: string | null
           updated_at: string
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           address?: string | null
@@ -737,7 +737,7 @@ export type Database = {
           notes?: string | null
           phone?: string | null
           updated_at?: string
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           address?: string | null
@@ -749,7 +749,7 @@ export type Database = {
           notes?: string | null
           phone?: string | null
           updated_at?: string
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: []
       }
