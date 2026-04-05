@@ -12,9 +12,10 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { toast } from 'sonner';
 
 const COUNTRIES = [
-  { name: 'Türkiye', flag: '🇹🇷' }, { name: 'Filistin', flag: '🇵🇸' }, { name: 'Suriye', flag: '🇸🇾' },
-  { name: 'Afganistan', flag: '🇦🇫' }, { name: 'Pakistan', flag: '🇵🇰' }, { name: 'Irak', flag: '🇮🇶' },
-  { name: 'Mısır', flag: '🇪🇬' }, { name: 'Özbekistan', flag: '🇺🇿' },
+  { name: 'KKTC', flag: '🇹🇷' }, { name: 'Türkiye', flag: '🇹🇷' }, { name: 'TÜRKMENİSTAN', flag: '🇹🇲' },
+  { name: 'FİLİSTİN', flag: '🇵🇸' }, { name: 'PAKİSTAN', flag: '🇵🇰' }, { name: 'Suriye', flag: '🇸🇾' },
+  { name: 'Afganistan', flag: '🇦🇫' }, { name: 'Irak', flag: '🇮🇶' }, { name: 'Mısır', flag: '🇪🇬' },
+  { name: 'Özbekistan', flag: '🇺🇿' },
 ];
 
 export function Dashboard() {
