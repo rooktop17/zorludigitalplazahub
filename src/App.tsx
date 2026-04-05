@@ -22,6 +22,7 @@ const KolayIzinEmployee = lazy(() => import("./modules/kolay-izin/pages/KolayIzi
 const KolayIzinAdminLogin = lazy(() => import("./modules/kolay-izin/pages/KolayIzinAdminLogin"));
 const KolayIzinAdmin = lazy(() => import("./modules/kolay-izin/pages/KolayIzinAdmin"));
 const IzinTakipPage = lazy(() => import("./modules/izin-takip/pages/IzinTakipPage"));
+const DisBorcPage = lazy(() => import("./modules/dis-borc/pages/DisBorcPage"));
 
 const queryClient = new QueryClient();
 
@@ -47,6 +48,7 @@ const App = () => (
             <Route path="/module/kolay-izin/panel" element={<KolayIzinAdminLogin />} />
             <Route path="/module/kolay-izin/admin" element={<KolayIzinAdmin />} />
             <Route path="/module/izin-takip" element={<IzinTakipPage />} />
+            <Route path="/module/dis-borc" element={<DisBorcPage />} />
             {/* External modules still use iframe viewer */}
             <Route path="/module/:moduleId" element={<ModuleViewer />} />
             <Route path="*" element={<NotFound />} />
