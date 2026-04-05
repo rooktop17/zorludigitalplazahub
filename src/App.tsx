@@ -23,6 +23,7 @@ const KolayIzinAdminLogin = lazy(() => import("./modules/kolay-izin/pages/KolayI
 const KolayIzinAdmin = lazy(() => import("./modules/kolay-izin/pages/KolayIzinAdmin"));
 const IzinTakipPage = lazy(() => import("./modules/izin-takip/pages/IzinTakipPage"));
 const DisBorcPage = lazy(() => import("./modules/dis-borc/pages/DisBorcPage"));
+const SparePartsPage = lazy(() => import("./modules/spare-parts/pages/SparePartsPage"));
 
 const queryClient = new QueryClient();
 
