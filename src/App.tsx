@@ -13,6 +13,14 @@ import PageLoader from "./components/PageLoader";
 const NotesPage = lazy(() => import("./modules/notes/pages/NotesPage"));
 const SigortaPage = lazy(() => import("./modules/sigorta/pages/SigortaPage"));
 const PrintLabelPage = lazy(() => import("./modules/print-label/pages/PrintLabelPage"));
+const ReturnRefundPage = lazy(() => import("./modules/return-refund/pages/ReturnRefundPage"));
+const QuoteCreatorPage = lazy(() => import("./modules/quote-creator/pages/QuoteCreatorPage"));
+const MaasKesintiPage = lazy(() => import("./modules/maas-kesinti/pages/MaasKesintiPage"));
+const MaasKesintiReports = lazy(() => import("./modules/maas-kesinti/pages/MaasKesintiReports"));
+const KolayIzinLogin = lazy(() => import("./modules/kolay-izin/pages/KolayIzinLogin"));
+const KolayIzinEmployee = lazy(() => import("./modules/kolay-izin/pages/KolayIzinEmployee"));
+const KolayIzinAdminLogin = lazy(() => import("./modules/kolay-izin/pages/KolayIzinAdminLogin"));
+const KolayIzinAdmin = lazy(() => import("./modules/kolay-izin/pages/KolayIzinAdmin"));
 
 const queryClient = new QueryClient();
 
