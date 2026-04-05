@@ -199,15 +199,23 @@ export type Database = {
         Row: {
           brand: string | null
           category: string
+          category_id: string
+          cost: number
           created_at: string
+          description: string | null
           id: string
+          image_url: string | null
           location: string | null
           min_stock: number
+          model: string | null
           name: string
           notes: string | null
           part_number: string
+          price: number
           purchase_price: number
           sale_price: number
+          sku: string | null
+          stock: number
           stock_quantity: number
           updated_at: string
           user_id: string
@@ -215,15 +223,23 @@ export type Database = {
         Insert: {
           brand?: string | null
           category?: string
+          category_id?: string
+          cost?: number
           created_at?: string
+          description?: string | null
           id?: string
+          image_url?: string | null
           location?: string | null
           min_stock?: number
+          model?: string | null
           name: string
           notes?: string | null
           part_number?: string
+          price?: number
           purchase_price?: number
           sale_price?: number
+          sku?: string | null
+          stock?: number
           stock_quantity?: number
           updated_at?: string
           user_id: string
@@ -231,15 +247,23 @@ export type Database = {
         Update: {
           brand?: string | null
           category?: string
+          category_id?: string
+          cost?: number
           created_at?: string
+          description?: string | null
           id?: string
+          image_url?: string | null
           location?: string | null
           min_stock?: number
+          model?: string | null
           name?: string
           notes?: string | null
           part_number?: string
+          price?: number
           purchase_price?: number
           sale_price?: number
+          sku?: string | null
+          stock?: number
           stock_quantity?: number
           updated_at?: string
           user_id?: string
@@ -320,6 +344,212 @@ export type Database = {
         }
         Relationships: []
       }
+      quote_items: {
+        Row: {
+          brand: string
+          category: string
+          created_at: string
+          custom_brand: string | null
+          discount: number
+          id: string
+          model: string
+          price: number
+          quantity: number
+          quote_id: string
+        }
+        Insert: {
+          brand?: string
+          category?: string
+          created_at?: string
+          custom_brand?: string | null
+          discount?: number
+          id?: string
+          model?: string
+          price?: number
+          quantity?: number
+          quote_id: string
+        }
+        Update: {
+          brand?: string
+          category?: string
+          created_at?: string
+          custom_brand?: string | null
+          discount?: number
+          id?: string
+          model?: string
+          price?: number
+          quantity?: number
+          quote_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quote_items_quote_id_fkey"
+            columns: ["quote_id"]
+            isOneToOne: false
+            referencedRelation: "quotes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quotes: {
+        Row: {
+          created_at: string
+          currency: string
+          customer_address: string | null
+          customer_email: string | null
+          customer_name: string
+          customer_phone: string | null
+          global_discount: number
+          id: string
+          notes: string | null
+          quote_date: string
+          quote_no: string
+          status: string
+          total_amount: number
+          updated_at: string
+          user_id: string | null
+          vat_included: boolean
+          vat_rate: number
+        }
+        Insert: {
+          created_at?: string
+          currency?: string
+          customer_address?: string | null
+          customer_email?: string | null
+          customer_name?: string
+          customer_phone?: string | null
+          global_discount?: number
+          id?: string
+          notes?: string | null
+          quote_date?: string
+          quote_no?: string
+          status?: string
+          total_amount?: number
+          updated_at?: string
+          user_id?: string | null
+          vat_included?: boolean
+          vat_rate?: number
+        }
+        Update: {
+          created_at?: string
+          currency?: string
+          customer_address?: string | null
+          customer_email?: string | null
+          customer_name?: string
+          customer_phone?: string | null
+          global_discount?: number
+          id?: string
+          notes?: string | null
+          quote_date?: string
+          quote_no?: string
+          status?: string
+          total_amount?: number
+          updated_at?: string
+          user_id?: string | null
+          vat_included?: boolean
+          vat_rate?: number
+        }
+        Relationships: []
+      }
+      return_requests: {
+        Row: {
+          account_holder: string | null
+          application_date: string
+          bank_branch: string | null
+          bank_name: string | null
+          created_at: string
+          customer_address: string | null
+          customer_email: string | null
+          customer_name: string
+          customer_phone: string | null
+          customer_surname: string
+          customer_tax_no: string | null
+          customer_tc_no: string | null
+          iban: string | null
+          id: string
+          invoice_date: string | null
+          invoice_no: string | null
+          notes: string | null
+          product_brand: string | null
+          product_condition: string | null
+          product_model: string | null
+          product_name: string | null
+          product_price: number
+          product_quantity: number
+          product_serial_no: string | null
+          return_reason: string | null
+          status: string
+          tax_amount: number
+          total_refund: number
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          account_holder?: string | null
+          application_date?: string
+          bank_branch?: string | null
+          bank_name?: string | null
+          created_at?: string
+          customer_address?: string | null
+          customer_email?: string | null
+          customer_name?: string
+          customer_phone?: string | null
+          customer_surname?: string
+          customer_tax_no?: string | null
+          customer_tc_no?: string | null
+          iban?: string | null
+          id?: string
+          invoice_date?: string | null
+          invoice_no?: string | null
+          notes?: string | null
+          product_brand?: string | null
+          product_condition?: string | null
+          product_model?: string | null
+          product_name?: string | null
+          product_price?: number
+          product_quantity?: number
+          product_serial_no?: string | null
+          return_reason?: string | null
+          status?: string
+          tax_amount?: number
+          total_refund?: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          account_holder?: string | null
+          application_date?: string
+          bank_branch?: string | null
+          bank_name?: string | null
+          created_at?: string
+          customer_address?: string | null
+          customer_email?: string | null
+          customer_name?: string
+          customer_phone?: string | null
+          customer_surname?: string
+          customer_tax_no?: string | null
+          customer_tc_no?: string | null
+          iban?: string | null
+          id?: string
+          invoice_date?: string | null
+          invoice_no?: string | null
+          notes?: string | null
+          product_brand?: string | null
+          product_condition?: string | null
+          product_model?: string | null
+          product_name?: string | null
+          product_price?: number
+          product_quantity?: number
+          product_serial_no?: string | null
+          return_reason?: string | null
+          status?: string
+          tax_amount?: number
+          total_refund?: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       sale_items: {
         Row: {
           created_at: string
@@ -371,34 +601,49 @@ export type Database = {
       sales: {
         Row: {
           created_at: string
+          customer_email: string | null
           customer_name: string
+          customer_phone: string | null
           discount: number
           id: string
+          net_amount: number
           notes: string | null
           payment_method: string
           sale_date: string
+          status: string
+          tax: number
           total_amount: number
           user_id: string
         }
         Insert: {
           created_at?: string
+          customer_email?: string | null
           customer_name?: string
+          customer_phone?: string | null
           discount?: number
           id?: string
+          net_amount?: number
           notes?: string | null
           payment_method?: string
           sale_date?: string
+          status?: string
+          tax?: number
           total_amount?: number
           user_id: string
         }
         Update: {
           created_at?: string
+          customer_email?: string | null
           customer_name?: string
+          customer_phone?: string | null
           discount?: number
           id?: string
+          net_amount?: number
           notes?: string | null
           payment_method?: string
           sale_date?: string
+          status?: string
+          tax?: number
           total_amount?: number
           user_id?: string
         }
@@ -407,13 +652,17 @@ export type Database = {
       sp_invoices: {
         Row: {
           created_at: string
+          customer_address: string | null
           customer_name: string
+          customer_tax_id: string | null
+          discount_amount: number
           due_date: string | null
           id: string
           invoice_number: string
           notes: string | null
           sale_id: string | null
           status: string
+          subtotal: number
           tax_amount: number
           total_amount: number
           updated_at: string
@@ -421,13 +670,17 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          customer_address?: string | null
           customer_name?: string
+          customer_tax_id?: string | null
+          discount_amount?: number
           due_date?: string | null
           id?: string
           invoice_number?: string
           notes?: string | null
           sale_id?: string | null
           status?: string
+          subtotal?: number
           tax_amount?: number
           total_amount?: number
           updated_at?: string
@@ -435,13 +688,17 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          customer_address?: string | null
           customer_name?: string
+          customer_tax_id?: string | null
+          discount_amount?: number
           due_date?: string | null
           id?: string
           invoice_number?: string
           notes?: string | null
           sale_id?: string | null
           status?: string
+          subtotal?: number
           tax_amount?: number
           total_amount?: number
           updated_at?: string
