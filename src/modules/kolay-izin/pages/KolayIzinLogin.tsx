@@ -48,7 +48,9 @@ export default function KolayIzinLogin() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <>
+    <ModuleHeader title="ZDC Kolay İzin" />
+    <div className="flex min-h-[calc(100vh-49px)] items-center justify-center bg-background px-4">
       <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-5">
         <div className="text-center space-y-3">
           <img src={logo} alt="Zorlu Digital Plaza" className="h-44 mx-auto" />
