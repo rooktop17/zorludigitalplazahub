@@ -313,7 +313,7 @@ const ReturnForm = () => {
                   </div>
                 )}
               </div>
-            )
+            )}
 
             <section className="form-section">
               <h2 className="form-section-title"><User size={20} className="text-primary" />Müşteri Bilgileri</h2>
