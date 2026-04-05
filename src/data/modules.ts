@@ -87,8 +87,9 @@ export const modules: Module[] = [
     title: "İade & Refund",
     description: "Ürün iade ve geri ödeme takip sistemi",
     icon3d: iconReturnRefund,
-    url: "https://refund-gentle.lovable.app",
+    url: "/module/return-refund",
     category: "Satış",
+    embedded: true,
   },
   {
     id: "print-label",
