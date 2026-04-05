@@ -26,8 +26,9 @@ export const modules: Module[] = [
     title: "Yedek Parça Hub",
     description: "Zorlu Plaza yedek parça yönetimi, satış ve stok takibi",
     icon3d: iconSpareParts,
-    url: "https://zorluyedekparcapaneli.lovable.app",
+    url: "/module/spare-parts",
     category: "Operasyon",
+    embedded: true,
   },
   {
     id: "notes",

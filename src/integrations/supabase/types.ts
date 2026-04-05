@@ -14,16 +14,261 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      employees: {
+        Row: {
+          created_at: string
+          department: string
+          gender: string
+          id: string
+          last_updated: string | null
+          name: string
+          photo_url: string | null
+          surname: string
+          total_leave: number
+          used_leave: number
+        }
+        Insert: {
+          created_at?: string
+          department?: string
+          gender?: string
+          id?: string
+          last_updated?: string | null
+          name: string
+          photo_url?: string | null
+          surname: string
+          total_leave?: number
+          used_leave?: number
+        }
+        Update: {
+          created_at?: string
+          department?: string
+          gender?: string
+          id?: string
+          last_updated?: string | null
+          name?: string
+          photo_url?: string | null
+          surname?: string
+          total_leave?: number
+          used_leave?: number
+        }
+        Relationships: []
+      }
+      invoices: {
+        Row: {
+          created_at: string
+          currency: string
+          description: string
+          due_date: string
+          has_invoice: boolean
+          id: string
+          invoice_number: string | null
+          notes: string | null
+          remaining_amount: number
+          status: string
+          supplier_id: string | null
+          supplier_name: string | null
+          total_amount: number
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          currency?: string
+          description?: string
+          due_date?: string
+          has_invoice?: boolean
+          id?: string
+          invoice_number?: string | null
+          notes?: string | null
+          remaining_amount?: number
+          status?: string
+          supplier_id?: string | null
+          supplier_name?: string | null
+          total_amount?: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          currency?: string
+          description?: string
+          due_date?: string
+          has_invoice?: boolean
+          id?: string
+          invoice_number?: string | null
+          notes?: string | null
+          remaining_amount?: number
+          status?: string
+          supplier_id?: string | null
+          supplier_name?: string | null
+          total_amount?: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "invoices_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      leave_records: {
+        Row: {
+          created_at: string
+          days_used: number
+          description: string | null
+          employee_id: string
+          end_date: string
+          id: string
+          start_date: string
+        }
+        Insert: {
+          created_at?: string
+          days_used: number
+          description?: string | null
+          employee_id: string
+          end_date: string
+          id?: string
+          start_date: string
+        }
+        Update: {
+          created_at?: string
+          days_used?: number
+          description?: string | null
+          employee_id?: string
+          end_date?: string
+          id?: string
+          start_date?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leave_records_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "employees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payments: {
+        Row: {
+          amount: number
+          created_at: string
+          id: string
+          invoice_id: string
+          notes: string | null
+          paid_by: string
+          payment_date: string
+          payment_method: string
+          user_id: string | null
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          id?: string
+          invoice_id: string
+          notes?: string | null
+          paid_by?: string
+          payment_date?: string
+          payment_method?: string
+          user_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: string
+          invoice_id?: string
+          notes?: string | null
+          paid_by?: string
+          payment_date?: string
+          payment_method?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      suppliers: {
+        Row: {
+          address: string | null
+          contact_person: string | null
+          created_at: string
+          email: string | null
+          id: string
+          name: string
+          notes: string | null
+          phone: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          address?: string | null
+          contact_person?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          name: string
+          notes?: string | null
+          phone?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          address?: string | null
+          contact_person?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          name?: string
+          notes?: string | null
+          phone?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +395,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const
