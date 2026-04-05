@@ -43,8 +43,9 @@ export const modules: Module[] = [
     title: "İzin Takip Paneli",
     description: "Personel izin yönetimi ve onay süreçleri",
     icon3d: iconIzinTakip,
-    url: "https://zdp-wht.lovable.app",
+    url: "/module/izin-takip",
     category: "İnsan Kaynakları",
+    embedded: true,
   },
   {
     id: "kolay-izin",

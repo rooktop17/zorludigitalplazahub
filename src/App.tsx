@@ -46,6 +46,7 @@ const App = () => (
             <Route path="/module/kolay-izin/employee" element={<KolayIzinEmployee />} />
             <Route path="/module/kolay-izin/panel" element={<KolayIzinAdminLogin />} />
             <Route path="/module/kolay-izin/admin" element={<KolayIzinAdmin />} />
+            <Route path="/module/izin-takip" element={<IzinTakipPage />} />
             {/* External modules still use iframe viewer */}
             <Route path="/module/:moduleId" element={<ModuleViewer />} />
             <Route path="*" element={<NotFound />} />
