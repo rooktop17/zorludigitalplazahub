@@ -49,7 +49,8 @@ const Parts: React.FC = () => {
         const { error } = await supabase.from('parts').update(payload).eq('id', editingPart.id);
         if (error) throw error;
       } else {
-        const { error } = await supabase.from('parts').insert(payload);
+        const { data: { user: currentUser } } = await supabase.auth.getUser();
+        const { error } = await supabase.from('parts').insert({ ...payload, user_id: currentUser?.id });
         if (error) throw error;
       }
       toast({ title: t('common.success') });

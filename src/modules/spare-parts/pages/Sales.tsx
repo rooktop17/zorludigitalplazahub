@@ -43,7 +43,8 @@ const Sales: React.FC = () => {
 
   const handleSave = async () => {
     try {
-      const { data: sale, error: saleErr } = await supabase.from('sales').insert({ customer_name: customer, customer_phone: customerPhone, customer_email: customerEmail, total_amount: subtotal, discount, tax: taxAmount, net_amount: netAmount, notes, status: 'completed' }).select().single();
+      const { data: { user: currentUser } } = await supabase.auth.getUser();
+      const { data: sale, error: saleErr } = await supabase.from('sales').insert({ customer_name: customer, customer_phone: customerPhone, customer_email: customerEmail, total_amount: subtotal, discount, tax: taxAmount, net_amount: netAmount, notes, status: 'completed', user_id: currentUser?.id }).select().single();
       if (saleErr) throw saleErr;
       const saleItems = items.map(i => ({ sale_id: sale.id, part_id: i.part_id, quantity: i.quantity, unit_price: i.unit_price, total_price: i.total_price }));
       const { error: itemsErr } = await supabase.from('sale_items').insert(saleItems);
