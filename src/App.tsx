@@ -13,6 +13,14 @@ import PageLoader from "./components/PageLoader";
 const NotesPage = lazy(() => import("./modules/notes/pages/NotesPage"));
 const SigortaPage = lazy(() => import("./modules/sigorta/pages/SigortaPage"));
 const PrintLabelPage = lazy(() => import("./modules/print-label/pages/PrintLabelPage"));
+const ReturnRefundPage = lazy(() => import("./modules/return-refund/pages/ReturnRefundPage"));
+const QuoteCreatorPage = lazy(() => import("./modules/quote-creator/pages/QuoteCreatorPage"));
+const MaasKesintiPage = lazy(() => import("./modules/maas-kesinti/pages/MaasKesintiPage"));
+const MaasKesintiReports = lazy(() => import("./modules/maas-kesinti/pages/MaasKesintiReports"));
+const KolayIzinLogin = lazy(() => import("./modules/kolay-izin/pages/KolayIzinLogin"));
+const KolayIzinEmployee = lazy(() => import("./modules/kolay-izin/pages/KolayIzinEmployee"));
+const KolayIzinAdminLogin = lazy(() => import("./modules/kolay-izin/pages/KolayIzinAdminLogin"));
+const KolayIzinAdmin = lazy(() => import("./modules/kolay-izin/pages/KolayIzinAdmin"));
 
 const queryClient = new QueryClient();
 
@@ -29,6 +37,14 @@ const App = () => (
             <Route path="/module/notes" element={<NotesPage />} />
             <Route path="/module/sigorta-ekspertiz" element={<SigortaPage />} />
             <Route path="/module/print-label" element={<PrintLabelPage />} />
+            <Route path="/module/return-refund" element={<ReturnRefundPage />} />
+            <Route path="/module/quote-creator" element={<QuoteCreatorPage />} />
+            <Route path="/module/maas-kesinti" element={<MaasKesintiPage />} />
+            <Route path="/module/maas-kesinti/raporlar" element={<MaasKesintiReports />} />
+            <Route path="/module/kolay-izin" element={<KolayIzinLogin />} />
+            <Route path="/module/kolay-izin/employee" element={<KolayIzinEmployee />} />
+            <Route path="/module/kolay-izin/panel" element={<KolayIzinAdminLogin />} />
+            <Route path="/module/kolay-izin/admin" element={<KolayIzinAdmin />} />
             {/* External modules still use iframe viewer */}
             <Route path="/module/:moduleId" element={<ModuleViewer />} />
             <Route path="*" element={<NotFound />} />
