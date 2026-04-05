@@ -1,29 +1,80 @@
 import { useState, useEffect } from 'react';
+import { supabase } from '@/integrations/supabase/client';
 import { PaymentRecord, MonthlyReport } from '@/modules/maas-kesinti/types/payment';
-
-const STORAGE_KEY = 'mk_payments';
-
-function loadPayments(): PaymentRecord[] {
-  const data = localStorage.getItem(STORAGE_KEY);
-  if (!data) return [];
-  try { return JSON.parse(data); } catch { return []; }
-}
-
-function savePayments(payments: PaymentRecord[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(payments));
-}
+import { toast } from 'sonner';
 
 export function usePaymentHistory() {
   const [payments, setPayments] = useState<PaymentRecord[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => { setPayments(loadPayments()); setLoading(false); }, []);
+  const fetchPayments = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('mk_payments')
+        .select('*')
+        .order('paid_at', { ascending: false });
 
-  const addBulkPayments = (newPayments: Omit<PaymentRecord, 'id'>[]) => {
-    const withIds = newPayments.map(p => ({ ...p, id: crypto.randomUUID() }));
-    const updated = [...withIds, ...payments];
-    setPayments(updated);
-    savePayments(updated);
+      if (error) throw error;
+
+      const mappedPayments: PaymentRecord[] = (data || []).map((p: any) => ({
+        id: p.id,
+        employeeId: p.employee_id,
+        employeeName: p.employee_name,
+        month: p.month,
+        baseSalary: Number(p.base_salary),
+        totalAdvances: Number(p.total_advances),
+        netPayment: Number(p.net_payment),
+        paidAt: p.paid_at,
+      }));
+
+      setPayments(mappedPayments);
+    } catch (error) {
+      console.error('Ödeme geçmişi yükleme hatası:', error);
+      toast.error('Ödeme geçmişi yüklenirken hata oluştu');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPayments();
+  }, []);
+
+  const addBulkPayments = async (newPayments: Omit<PaymentRecord, 'id'>[]) => {
+    try {
+      const insertData = newPayments.map(p => ({
+        employee_id: p.employeeId,
+        employee_name: p.employeeName,
+        month: p.month,
+        base_salary: p.baseSalary,
+        total_advances: p.totalAdvances,
+        net_payment: p.netPayment,
+        paid_at: p.paidAt,
+      }));
+
+      const { data, error } = await supabase
+        .from('mk_payments')
+        .insert(insertData as any)
+        .select();
+
+      if (error) throw error;
+
+      const mappedNewPayments: PaymentRecord[] = (data || []).map((p: any) => ({
+        id: p.id,
+        employeeId: p.employee_id,
+        employeeName: p.employee_name,
+        month: p.month,
+        baseSalary: Number(p.base_salary),
+        totalAdvances: Number(p.total_advances),
+        netPayment: Number(p.net_payment),
+        paidAt: p.paid_at,
+      }));
+
+      setPayments(prev => [...mappedNewPayments, ...prev]);
+    } catch (error) {
+      console.error('Toplu ödeme ekleme hatası:', error);
+      toast.error('Ödemeler eklenirken hata oluştu');
+    }
   };
 
   const getMonthlyReports = (): MonthlyReport[] => {
@@ -33,7 +84,16 @@ export function usePaymentHistory() {
     monthsMap.forEach((mp, monthKey) => {
       const [year, month] = monthKey.split('-').map(Number);
       const date = new Date(year, month - 1);
-      reports.push({ month: monthKey, year, monthName: date.toLocaleDateString('tr-TR', { month: 'long', year: 'numeric' }), totalEmployees: mp.length, totalSalaries: mp.reduce((s, p) => s + p.baseSalary, 0), totalAdvances: mp.reduce((s, p) => s + p.totalAdvances, 0), totalPaid: mp.reduce((s, p) => s + p.netPayment, 0), payments: mp });
+      reports.push({
+        month: monthKey,
+        year,
+        monthName: date.toLocaleDateString('tr-TR', { month: 'long', year: 'numeric' }),
+        totalEmployees: mp.length,
+        totalSalaries: mp.reduce((s, p) => s + p.baseSalary, 0),
+        totalAdvances: mp.reduce((s, p) => s + p.totalAdvances, 0),
+        totalPaid: mp.reduce((s, p) => s + p.netPayment, 0),
+        payments: mp,
+      });
     });
     return reports.sort((a, b) => b.month.localeCompare(a.month));
   };
@@ -42,5 +102,5 @@ export function usePaymentHistory() {
     return payments.some(p => p.employeeId === employeeId && p.month === month);
   };
 
-  return { payments, loading, addBulkPayments, getMonthlyReports, hasPaymentForMonth };
+  return { payments, loading, addBulkPayments, getMonthlyReports, hasPaymentForMonth, refetch: fetchPayments };
 }

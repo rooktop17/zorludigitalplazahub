@@ -31,8 +31,8 @@ const AdminPanel: React.FC = () => {
 
   const changeRole = async (userId: string, roleId: string | undefined, newRole: string) => {
     try {
-      if (roleId) await supabase.from('user_roles').update({ role: newRole }).eq('id', roleId);
-      else await supabase.from('user_roles').insert({ user_id: userId, role: newRole });
+      if (roleId) await supabase.from('user_roles').update({ role: newRole as any }).eq('id', roleId);
+      else await supabase.from('user_roles').insert([{ user_id: userId, role: newRole as any }]);
       setUsers(users.map(u => u.user_id === userId ? { ...u, role: newRole } : u));
       toast({ title: t('common.success') });
     } catch (err: any) { toast({ title: t('common.error'), description: err.message, variant: 'destructive' }); }
