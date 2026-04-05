@@ -271,6 +271,14 @@ const ReturnForm = () => {
 
           <div className="bg-card rounded-b-xl shadow-lg border border-t-0 border-border p-6 md:p-8">
             <div className="flex flex-wrap justify-end gap-3 mb-6 no-print">
+              <button onClick={handleSaveToDb} className="print-button bg-green-600 text-white" disabled={isSaving}>
+                <Save size={18} />
+                {isSaving ? "Kaydediliyor..." : currentId ? "Güncelle" : "Kaydet"}
+              </button>
+              <button onClick={fetchSavedRequests} className="print-button bg-blue-600 text-white">
+                <List size={18} />
+                Kayıtlı Talepler
+              </button>
               <button onClick={handleDownloadPdf} className="print-button bg-accent" disabled={isGeneratingPdf}>
                 <Download size={18} />
                 {isGeneratingPdf ? "PDF Hazırlanıyor..." : "PDF İndir"}
@@ -280,6 +288,32 @@ const ReturnForm = () => {
                 Yazdır
               </button>
             </div>
+
+            {showSavedList && (
+              <div className="mb-6 border border-border rounded-lg p-4 bg-muted/30">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-semibold text-foreground">Kayıtlı İade Talepleri</h3>
+                  <button onClick={() => setShowSavedList(false)} className="text-sm text-muted-foreground hover:text-foreground">Kapat</button>
+                </div>
+                {savedRequests.length === 0 ? (
+                  <p className="text-sm text-muted-foreground">Henüz kayıtlı talep yok.</p>
+                ) : (
+                  <div className="space-y-2 max-h-60 overflow-y-auto">
+                    {savedRequests.map(req => (
+                      <div key={req.id} className="flex items-center justify-between p-2 bg-card rounded border border-border">
+                        <button onClick={() => loadRequest(req)} className="text-left flex-1 hover:text-primary">
+                          <span className="font-medium">{req.customer_name} {req.customer_surname}</span>
+                          <span className="text-xs text-muted-foreground ml-2">{req.application_date} — {req.status}</span>
+                        </button>
+                        <button onClick={() => deleteRequest(req.id)} className="text-destructive hover:text-destructive/80 ml-2 p-1">
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )
 
             <section className="form-section">
               <h2 className="form-section-title"><User size={20} className="text-primary" />Müşteri Bilgileri</h2>
