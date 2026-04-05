@@ -42,7 +42,7 @@ const LeaveRequestsList = ({ isAdmin, employeeId, onApproved }: LeaveRequestsLis
     if (error) { console.error(error); setLoading(false); return; }
 
     if (isAdmin && data && data.length > 0) {
-      const empIds = [...new Set(data.map((r: any) => r.employee_id))];
+      const empIds = [...new Set(data.map((r: any) => r.employee_id))] as string[];
       const { data: emps } = await supabase.from('employees').select('id, name, surname').in('id', empIds);
       const empMap = new Map(emps?.map((e: any) => [e.id, e]) || []);
       setRequests(data.map((r: any) => {
