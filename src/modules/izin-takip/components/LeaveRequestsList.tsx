@@ -58,7 +58,7 @@ const LeaveRequestsList = ({ isAdmin, employeeId, onApproved }: LeaveRequestsLis
   useEffect(() => { fetchRequests(); }, [isAdmin, employeeId]);
 
   const handleAction = async (requestId: string, action: 'approved' | 'rejected', empId: string, days: number, startDate: string, endDate: string) => {
-    const { error } = await supabase
+    const { error } = await (supabase as any)
       .from('leave_requests')
       .update({ status: action, reviewed_at: new Date().toISOString() })
       .eq('id', requestId);
