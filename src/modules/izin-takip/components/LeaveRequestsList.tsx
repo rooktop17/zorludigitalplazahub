@@ -35,7 +35,7 @@ const LeaveRequestsList = ({ isAdmin, employeeId, onApproved }: LeaveRequestsLis
 
   const fetchRequests = async () => {
     setLoading(true);
-    let query = supabase.from('leave_requests').select('*').order('created_at', { ascending: false });
+    let query = (supabase as any).from('leave_requests').select('*').order('created_at', { ascending: false });
     if (!isAdmin && employeeId) query = query.eq('employee_id', employeeId);
 
     const { data, error } = await query;
