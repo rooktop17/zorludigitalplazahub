@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Printer, RefreshCw, Download } from "lucide-react";
+import ModuleHeader from "@/components/ModuleHeader";
 import InsuranceReportForm from "../components/InsuranceReportForm";
 import InsuranceReportPreview from "../components/InsuranceReportPreview";
 import zorluLogo from "@/assets/zorlu-logo.png";
