@@ -26,6 +26,7 @@ export type Database = {
           surname: string
           total_leave: number
           used_leave: number
+          user_id: string | null
         }
         Insert: {
           created_at?: string
@@ -38,6 +39,7 @@ export type Database = {
           surname: string
           total_leave?: number
           used_leave?: number
+          user_id?: string | null
         }
         Update: {
           created_at?: string
@@ -50,6 +52,7 @@ export type Database = {
           surname?: string
           total_leave?: number
           used_leave?: number
+          user_id?: string | null
         }
         Relationships: []
       }
