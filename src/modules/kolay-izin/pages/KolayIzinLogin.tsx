@@ -98,5 +98,6 @@ export default function KolayIzinLogin() {
         </Button>
       </form>
     </div>
+    </>
   );
 }
