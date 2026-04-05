@@ -1,3 +1,4 @@
+import ModuleHeader from '@/components/ModuleHeader';
 import { Navigation } from '@/modules/maas-kesinti/components/Navigation';
 import { usePaymentHistory } from '@/modules/maas-kesinti/hooks/usePaymentHistory';
 import { Card, CardContent } from '@/components/ui/card';
