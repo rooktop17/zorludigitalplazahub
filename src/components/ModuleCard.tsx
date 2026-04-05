@@ -42,7 +42,13 @@ const ModuleCard = ({ module, index }: ModuleCardProps) => {
       }}
     >
       <motion.button
-        onClick={() => navigate(`/module/${module.id}`)}
+        onClick={() => {
+          if (module.embedded) {
+            navigate(module.url);
+          } else {
+            window.open(module.url, '_blank', 'noopener,noreferrer');
+          }
+        }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         animate={{ rotateX, rotateY }}
