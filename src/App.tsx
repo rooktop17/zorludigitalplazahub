@@ -17,11 +17,6 @@ const ReturnRefundPage = lazy(() => import("./modules/return-refund/pages/Return
 const QuoteCreatorPage = lazy(() => import("./modules/quote-creator/pages/QuoteCreatorPage"));
 const MaasKesintiPage = lazy(() => import("./modules/maas-kesinti/pages/MaasKesintiPage"));
 const MaasKesintiReports = lazy(() => import("./modules/maas-kesinti/pages/MaasKesintiReports"));
-const KolayIzinLogin = lazy(() => import("./modules/kolay-izin/pages/KolayIzinLogin"));
-const KolayIzinEmployee = lazy(() => import("./modules/kolay-izin/pages/KolayIzinEmployee"));
-const KolayIzinAdminLogin = lazy(() => import("./modules/kolay-izin/pages/KolayIzinAdminLogin"));
-const KolayIzinAdmin = lazy(() => import("./modules/kolay-izin/pages/KolayIzinAdmin"));
-const IzinTakipPage = lazy(() => import("./modules/izin-takip/pages/IzinTakipPage"));
 const DisBorcPage = lazy(() => import("./modules/dis-borc/pages/DisBorcPage"));
 const SparePartsPage = lazy(() => import("./modules/spare-parts/pages/SparePartsPage"));
 
@@ -44,11 +39,6 @@ const App = () => (
             <Route path="/module/quote-creator" element={<QuoteCreatorPage />} />
             <Route path="/module/maas-kesinti" element={<MaasKesintiPage />} />
             <Route path="/module/maas-kesinti/raporlar" element={<MaasKesintiReports />} />
-            <Route path="/module/kolay-izin" element={<KolayIzinLogin />} />
-            <Route path="/module/kolay-izin/employee" element={<KolayIzinEmployee />} />
-            <Route path="/module/kolay-izin/panel" element={<KolayIzinAdminLogin />} />
-            <Route path="/module/kolay-izin/admin" element={<KolayIzinAdmin />} />
-            <Route path="/module/izin-takip" element={<IzinTakipPage />} />
             <Route path="/module/dis-borc" element={<DisBorcPage />} />
             <Route path="/module/spare-parts/*" element={<SparePartsPage />} />
             {/* External modules still use iframe viewer */}

@@ -1,7 +1,5 @@
 import iconSpareParts from "@/assets/icons/spare-parts.png";
 import iconNotes from "@/assets/icons/notes.png";
-import iconIzinTakip from "@/assets/icons/izin-takip.png";
-import iconKolayIzin from "@/assets/icons/kolay-izin.png";
 import iconQuoteCreator from "@/assets/icons/quote-creator.png";
 import iconMaasKesinti from "@/assets/icons/maas-kesinti.png";
 import iconSigorta from "@/assets/icons/sigorta.png";
@@ -37,24 +35,6 @@ export const modules: Module[] = [
     icon3d: iconNotes,
     url: "/module/notes",
     category: "Araçlar",
-    embedded: true,
-  },
-  {
-    id: "izin-takip",
-    title: "İzin Takip Paneli",
-    description: "Personel izin yönetimi ve onay süreçleri",
-    icon3d: iconIzinTakip,
-    url: "/module/izin-takip",
-    category: "İnsan Kaynakları",
-    embedded: true,
-  },
-  {
-    id: "kolay-izin",
-    title: "ZDC Kolay İzin",
-    description: "Kolay izin talep ve takip sistemi",
-    icon3d: iconKolayIzin,
-    url: "/module/kolay-izin",
-    category: "İnsan Kaynakları",
     embedded: true,
   },
   {
