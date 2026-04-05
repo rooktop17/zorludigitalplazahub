@@ -150,6 +150,109 @@ const ReturnForm = () => {
     setFormData(prev => ({ ...prev, iban: formatted }));
   };
 
+  const handleSaveToDb = async () => {
+    setIsSaving(true);
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) { toast.error("Lütfen giriş yapın."); setIsSaving(false); return; }
+
+      const record = {
+        user_id: user.id,
+        customer_name: formData.customerName,
+        customer_surname: formData.customerSurname,
+        customer_phone: formData.customerPhone || null,
+        customer_email: formData.customerEmail || null,
+        customer_address: formData.customerAddress || null,
+        customer_tc_no: formData.customerTcNo || null,
+        customer_tax_no: formData.customerTaxNo || null,
+        invoice_no: formData.invoiceNo || null,
+        invoice_date: formData.invoiceDate || null,
+        product_name: formData.productName || null,
+        product_brand: formData.productBrand || null,
+        product_model: formData.productModel || null,
+        product_serial_no: formData.productSerialNo || null,
+        product_quantity: parseInt(formData.productQuantity) || 1,
+        return_reason: formData.returnReason || null,
+        product_condition: formData.productCondition || null,
+        bank_name: formData.bankName || null,
+        bank_branch: formData.bankBranch || null,
+        account_holder: formData.accountHolder || null,
+        iban: formData.iban || null,
+        product_price: parseFloat(formData.productPrice.replace(',', '.')) || 0,
+        tax_amount: parseFloat(formData.taxAmount.replace(',', '.')) || 0,
+        total_refund: parseFloat(formData.totalRefund.replace(',', '.')) || 0,
+        application_date: formData.applicationDate,
+        notes: formData.notes || null,
+      };
+
+      if (currentId) {
+        const { error } = await supabase.from('return_requests').update(record).eq('id', currentId);
+        if (error) throw error;
+        toast.success("İade talebi güncellendi!");
+      } else {
+        const { data, error } = await supabase.from('return_requests').insert(record).select().single();
+        if (error) throw error;
+        setCurrentId(data.id);
+        toast.success("İade talebi kaydedildi!");
+      }
+    } catch (err: any) {
+      toast.error("Kayıt hatası: " + (err.message || "Bilinmeyen hata"));
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const fetchSavedRequests = async () => {
+    const { data, error } = await supabase.from('return_requests').select('*').order('created_at', { ascending: false });
+    if (error) { toast.error("Liste alınamadı."); return; }
+    setSavedRequests(data || []);
+    setShowSavedList(true);
+  };
+
+  const loadRequest = (req: any) => {
+    setCurrentId(req.id);
+    setFormData({
+      customerName: req.customer_name || "",
+      customerSurname: req.customer_surname || "",
+      customerPhone: req.customer_phone || "",
+      customerEmail: req.customer_email || "",
+      customerAddress: req.customer_address || "",
+      customerTcNo: req.customer_tc_no || "",
+      customerTaxNo: req.customer_tax_no || "",
+      invoiceNo: req.invoice_no || "",
+      invoiceDate: req.invoice_date || "",
+      invoiceName: "",
+      invoiceSurname: "",
+      invoiceTaxNo: "",
+      productName: req.product_name || "",
+      productBrand: req.product_brand || "",
+      productModel: req.product_model || "",
+      productSerialNo: req.product_serial_no || "",
+      productQuantity: String(req.product_quantity || 1),
+      returnReason: req.return_reason || "",
+      productCondition: req.product_condition || "",
+      bankName: req.bank_name || "",
+      bankBranch: req.bank_branch || "",
+      accountHolder: req.account_holder || "",
+      iban: req.iban || "",
+      productPrice: String(req.product_price || ""),
+      taxAmount: String(req.tax_amount || ""),
+      totalRefund: String(req.total_refund || ""),
+      applicationDate: req.application_date || new Date().toISOString().split('T')[0],
+      notes: req.notes || "",
+    });
+    setShowSavedList(false);
+    toast.success("Talep yüklendi.");
+  };
+
+  const deleteRequest = async (id: string) => {
+    const { error } = await supabase.from('return_requests').delete().eq('id', id);
+    if (error) { toast.error("Silinemedi."); return; }
+    setSavedRequests(prev => prev.filter(r => r.id !== id));
+    if (currentId === id) setCurrentId(null);
+    toast.success("Talep silindi.");
+  };
+
   return (
     <div className="min-h-screen bg-background py-8 px-4">
       <div className="max-w-4xl mx-auto">
