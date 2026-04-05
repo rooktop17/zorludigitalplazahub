@@ -271,11 +271,11 @@ const ReturnForm = () => {
 
           <div className="bg-card rounded-b-xl shadow-lg border border-t-0 border-border p-6 md:p-8">
             <div className="flex flex-wrap justify-end gap-3 mb-6 no-print">
-              <button onClick={handleSaveToDb} className="print-button bg-green-600 text-white" disabled={isSaving}>
+              <button onClick={handleSaveToDb} className="print-button bg-primary text-primary-foreground" disabled={isSaving}>
                 <Save size={18} />
                 {isSaving ? "Kaydediliyor..." : currentId ? "Güncelle" : "Kaydet"}
               </button>
-              <button onClick={fetchSavedRequests} className="print-button bg-blue-600 text-white">
+              <button onClick={fetchSavedRequests} className="print-button bg-secondary text-secondary-foreground">
                 <List size={18} />
                 Kayıtlı Talepler
               </button>
