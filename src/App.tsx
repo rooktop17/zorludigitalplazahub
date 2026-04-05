@@ -21,6 +21,7 @@ const KolayIzinLogin = lazy(() => import("./modules/kolay-izin/pages/KolayIzinLo
 const KolayIzinEmployee = lazy(() => import("./modules/kolay-izin/pages/KolayIzinEmployee"));
 const KolayIzinAdminLogin = lazy(() => import("./modules/kolay-izin/pages/KolayIzinAdminLogin"));
 const KolayIzinAdmin = lazy(() => import("./modules/kolay-izin/pages/KolayIzinAdmin"));
+const IzinTakipPage = lazy(() => import("./modules/izin-takip/pages/IzinTakipPage"));
 
 const queryClient = new QueryClient();
 
