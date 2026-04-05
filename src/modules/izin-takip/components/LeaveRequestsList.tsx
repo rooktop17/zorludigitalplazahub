@@ -35,14 +35,14 @@ const LeaveRequestsList = ({ isAdmin, employeeId, onApproved }: LeaveRequestsLis
 
   const fetchRequests = async () => {
     setLoading(true);
-    let query = supabase.from('leave_requests').select('*').order('created_at', { ascending: false });
+    let query = (supabase as any).from('leave_requests').select('*').order('created_at', { ascending: false });
     if (!isAdmin && employeeId) query = query.eq('employee_id', employeeId);
 
     const { data, error } = await query;
     if (error) { console.error(error); setLoading(false); return; }
 
     if (isAdmin && data && data.length > 0) {
-      const empIds = [...new Set(data.map((r: any) => r.employee_id))];
+      const empIds = [...new Set(data.map((r: any) => r.employee_id))] as string[];
       const { data: emps } = await supabase.from('employees').select('id, name, surname').in('id', empIds);
       const empMap = new Map(emps?.map((e: any) => [e.id, e]) || []);
       setRequests(data.map((r: any) => {
@@ -58,7 +58,7 @@ const LeaveRequestsList = ({ isAdmin, employeeId, onApproved }: LeaveRequestsLis
   useEffect(() => { fetchRequests(); }, [isAdmin, employeeId]);
 
   const handleAction = async (requestId: string, action: 'approved' | 'rejected', empId: string, days: number, startDate: string, endDate: string) => {
-    const { error } = await supabase
+    const { error } = await (supabase as any)
       .from('leave_requests')
       .update({ status: action, reviewed_at: new Date().toISOString() })
       .eq('id', requestId);

@@ -195,6 +195,162 @@ export type Database = {
           },
         ]
       }
+      leave_requests: {
+        Row: {
+          created_at: string
+          days_requested: number
+          employee_id: string
+          end_date: string
+          id: string
+          reason: string | null
+          reviewed_at: string | null
+          start_date: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          days_requested: number
+          employee_id: string
+          end_date: string
+          id?: string
+          reason?: string | null
+          reviewed_at?: string | null
+          start_date: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          days_requested?: number
+          employee_id?: string
+          end_date?: string
+          id?: string
+          reason?: string | null
+          reviewed_at?: string | null
+          start_date?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leave_requests_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "employees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mk_advances: {
+        Row: {
+          amount: number
+          created_at: string
+          date: string
+          description: string | null
+          employee_id: string
+          id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          date: string
+          description?: string | null
+          employee_id: string
+          id?: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          date?: string
+          description?: string | null
+          employee_id?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mk_advances_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "mk_employees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mk_employees: {
+        Row: {
+          country: string
+          created_at: string
+          flag: string
+          id: string
+          name: string
+          photo: string | null
+          salary: number
+          updated_at: string
+        }
+        Insert: {
+          country: string
+          created_at?: string
+          flag: string
+          id?: string
+          name: string
+          photo?: string | null
+          salary?: number
+          updated_at?: string
+        }
+        Update: {
+          country?: string
+          created_at?: string
+          flag?: string
+          id?: string
+          name?: string
+          photo?: string | null
+          salary?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      mk_payments: {
+        Row: {
+          base_salary: number
+          created_at: string
+          employee_id: string
+          employee_name: string
+          id: string
+          month: string
+          net_payment: number
+          paid_at: string
+          total_advances: number
+        }
+        Insert: {
+          base_salary: number
+          created_at?: string
+          employee_id: string
+          employee_name: string
+          id?: string
+          month: string
+          net_payment: number
+          paid_at?: string
+          total_advances: number
+        }
+        Update: {
+          base_salary?: number
+          created_at?: string
+          employee_id?: string
+          employee_name?: string
+          id?: string
+          month?: string
+          net_payment?: number
+          paid_at?: string
+          total_advances?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mk_payments_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "mk_employees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       parts: {
         Row: {
           brand: string | null

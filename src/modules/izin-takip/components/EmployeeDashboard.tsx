@@ -132,7 +132,7 @@ const EmployeeDashboard = ({ employeeId, onSignOut }: EmployeeDashboardProps) =>
       <ChangePasswordModal open={isPasswordModalOpen} onOpenChange={setIsPasswordModalOpen} />
       <LeaveRequestModal open={isRequestModalOpen} onOpenChange={setIsRequestModalOpen} remainingLeave={remainingLeave}
         onSubmit={async (startDate, endDate, days, reason) => {
-          const { error } = await supabase.from('leave_requests').insert({
+          const { error } = await (supabase as any).from('leave_requests').insert({
             employee_id: employeeId,
             start_date: startDate.toISOString().split('T')[0],
             end_date: endDate.toISOString().split('T')[0],

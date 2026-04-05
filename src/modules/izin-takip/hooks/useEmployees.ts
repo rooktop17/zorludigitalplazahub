@@ -46,7 +46,7 @@ export const useEmployees = () => {
     try {
       const { data, error } = await supabase
         .from('employees')
-        .insert({
+        .insert([{
           name: newEmployee.name,
           surname: newEmployee.surname,
           department: newEmployee.department,
@@ -54,7 +54,8 @@ export const useEmployees = () => {
           photo_url: newEmployee.photoUrl,
           total_leave: newEmployee.totalLeave,
           used_leave: newEmployee.usedLeave,
-        })
+          user_id: (await supabase.auth.getUser()).data.user?.id || '',
+        }])
         .select()
         .single();
 
