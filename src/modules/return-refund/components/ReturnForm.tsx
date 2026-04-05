@@ -43,6 +43,10 @@ const ReturnForm = () => {
   const printRef = useRef<HTMLDivElement>(null);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [savedRequests, setSavedRequests] = useState<any[]>([]);
+  const [showSavedList, setShowSavedList] = useState(false);
+  const [currentId, setCurrentId] = useState<string | null>(null);
   const [formData, setFormData] = useState<FormData>({
     customerName: "",
     customerSurname: "",
