@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { supabase } from '@/integrations/supabase/untypedClient';
+import { supabase } from '@/integrations/supabase/client';
 import { addDays, isBefore, startOfDay } from 'date-fns';
 
 export interface DashboardStats {

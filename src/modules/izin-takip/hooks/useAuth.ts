@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '@/integrations/supabase/untypedClient';
+import { supabase } from '@/integrations/supabase/client';
 import { User } from '@supabase/supabase-js';
 
 type AppRole = 'admin' | 'employee';

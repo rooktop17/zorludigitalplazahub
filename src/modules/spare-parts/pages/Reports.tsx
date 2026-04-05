@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '@/modules/spare-parts/components/Layout';
 import { useLanguage } from '@/modules/spare-parts/contexts/LanguageContext';
-import { supabase } from '@/integrations/supabase/untypedClient';
+import { supabase } from '@/integrations/supabase/client';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
 import { TrendingUp, ShoppingCart, DollarSign, Package } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';

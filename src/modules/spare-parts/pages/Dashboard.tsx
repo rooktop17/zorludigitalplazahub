@@ -3,7 +3,7 @@ import Layout from '@/modules/spare-parts/components/Layout';
 import GreetingBanner from '@/modules/spare-parts/components/GreetingBanner';
 import { useLanguage } from '@/modules/spare-parts/contexts/LanguageContext';
 import { useAuth } from '@/modules/spare-parts/contexts/AuthContext';
-import { supabase } from '@/integrations/supabase/untypedClient';
+import { supabase } from '@/integrations/supabase/client';
 import { Package, ShoppingCart, TrendingUp, AlertTriangle } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
