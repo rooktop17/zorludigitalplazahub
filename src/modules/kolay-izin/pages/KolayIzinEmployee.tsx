@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import ModuleHeader from "@/components/ModuleHeader";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -100,7 +101,9 @@ export default function KolayIzinEmployee() {
   if (!session) return null;
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+    <ModuleHeader title="ZDC Kolay İzin" />
+    <div className="min-h-[calc(100vh-49px)] bg-background">
       <header className="border-b px-4 py-3 flex items-center justify-between">
         <h1 className="text-lg font-bold text-foreground">İzin Talebi</h1>
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -184,5 +187,6 @@ export default function KolayIzinEmployee() {
         </div>
       </main>
     </div>
+    </>
   );
 }

@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Printer, RefreshCw, Download } from "lucide-react";
+import ModuleHeader from "@/components/ModuleHeader";
 import InsuranceReportForm from "../components/InsuranceReportForm";
 import InsuranceReportPreview from "../components/InsuranceReportPreview";
 import zorluLogo from "@/assets/zorlu-logo.png";
@@ -66,6 +67,7 @@ const SigortaPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <ModuleHeader title="Sigorta & Ekspertiz" />
       <header className="no-print bg-card border-b border-border sticky top-0 z-10">
         <div className="max-w-[1800px] mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
