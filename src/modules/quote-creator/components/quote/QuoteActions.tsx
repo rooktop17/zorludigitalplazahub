@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Plus, Save, Upload, Download, FileUp, Printer, Trash2 } from 'lucide-react';
+import { Plus, Save, Upload, Download, FileUp, Printer, Trash2, Database, List } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface QuoteActionsProps {
@@ -11,15 +11,19 @@ interface QuoteActionsProps {
   onImport: (file: File) => Promise<boolean>;
   onClear: () => void;
   onPrintPreview: () => void;
+  onSaveToDb?: () => Promise<boolean>;
+  onShowSavedQuotes?: () => void;
 }
 
-export function QuoteActions({ onAddRow, onSave, onLoad, onExport, onImport, onClear, onPrintPreview }: QuoteActionsProps) {
+export function QuoteActions({ onAddRow, onSave, onLoad, onExport, onImport, onClear, onPrintPreview, onSaveToDb, onShowSavedQuotes }: QuoteActionsProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   return (
     <div className="no-print">
       <div className="flex flex-wrap items-center gap-2 mt-5">
         <Button onClick={onAddRow} className="bg-gold text-accent-foreground hover:bg-gold/90"><Plus className="w-4 h-4 mr-1" />Satır Ekle</Button>
+        {onSaveToDb && <Button onClick={async () => { await onSaveToDb(); }} variant="default"><Database className="w-4 h-4 mr-1" />Veritabanına Kaydet</Button>}
+        {onShowSavedQuotes && <Button onClick={onShowSavedQuotes} variant="outline"><List className="w-4 h-4 mr-1" />Kayıtlı Teklifler</Button>}
         <Button onClick={() => { if (onSave()) toast.success('Kaydedildi'); }} variant="outline"><Save className="w-4 h-4 mr-1" />Yerel Kaydet</Button>
         <Button onClick={() => { if (onLoad()) toast.success('Yüklendi'); else toast.error('Kayıt bulunamadı'); }} variant="outline"><Upload className="w-4 h-4 mr-1" />Yerel Yükle</Button>
         <Button onClick={onExport} variant="outline"><Download className="w-4 h-4 mr-1" />JSON</Button>
