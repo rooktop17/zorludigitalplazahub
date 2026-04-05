@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from '@/modules/spare-parts/components/Layout';
 import { useLanguage } from '@/modules/spare-parts/contexts/LanguageContext';
 import { useAuth } from '@/modules/spare-parts/contexts/AuthContext';
-import { supabase } from '@/integrations/supabase/untypedClient';
+import { supabase } from '@/integrations/supabase/client';
 import { Plus, Edit2, Trash2, Search, AlertTriangle } from 'lucide-react';
 import { categories } from '@/modules/spare-parts/lib/categories';
 import { Button } from '@/components/ui/button';

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from '@/modules/spare-parts/components/Layout';
 import { useLanguage } from '@/modules/spare-parts/contexts/LanguageContext';
 import { useAuth } from '@/modules/spare-parts/contexts/AuthContext';
-import { supabase } from '@/integrations/supabase/untypedClient';
+import { supabase } from '@/integrations/supabase/client';
 import { Shield, ShieldCheck, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';

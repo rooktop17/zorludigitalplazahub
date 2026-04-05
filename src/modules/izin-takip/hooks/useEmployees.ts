@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '@/integrations/supabase/untypedClient';
+import { supabase } from '@/integrations/supabase/client';
 import { Employee } from '@/modules/izin-takip/types/employee';
 import { useToast } from '@/hooks/use-toast';
 

@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { Upload, X, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { supabase } from '@/integrations/supabase/untypedClient';
+import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
 interface PhotoUploadProps {

@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from 'react';
 import { QuoteData, QuoteRow, Currency } from '@/modules/quote-creator/types/quote';
-import { supabase } from '@/integrations/supabase/untypedClient';
+import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
 const STORAGE_KEY = 'zorlu_teklif_formu_v1';
