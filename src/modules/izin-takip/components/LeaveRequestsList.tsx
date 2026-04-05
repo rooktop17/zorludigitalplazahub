@@ -5,7 +5,7 @@ import { tr } from 'date-fns/locale';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@/integrations/supabase/untypedClient';
 import { useToast } from '@/hooks/use-toast';
 
 interface LeaveRequest {

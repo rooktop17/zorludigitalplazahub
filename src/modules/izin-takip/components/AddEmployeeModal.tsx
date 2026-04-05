@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Employee, DEFAULT_LEAVE_QUOTA, DEPARTMENTS } from '@/modules/izin-takip/types/employee';
 import PhotoUpload from '@/modules/izin-takip/components/PhotoUpload';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@/integrations/supabase/untypedClient';
 import { useToast } from '@/hooks/use-toast';
 
 interface AddEmployeeModalProps {

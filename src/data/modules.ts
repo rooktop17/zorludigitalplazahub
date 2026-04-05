@@ -106,8 +106,9 @@ export const modules: Module[] = [
     title: "Dış Borç Takip & Ödeme",
     description: "Dış borç takip ve ödeme yönetim paneli",
     icon3d: iconDisBorc,
-    url: "https://disariodenecekacikhesappaneli.lovable.app",
+    url: "/module/dis-borc",
     category: "Finans",
+    embedded: true,
   },
 ];
 

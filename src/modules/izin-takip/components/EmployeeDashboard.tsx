@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Progress } from '@/components/ui/progress';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from '@/integrations/supabase/untypedClient';
 import { Employee, LeaveRecord } from '@/modules/izin-takip/types/employee';
 import { format } from 'date-fns';
 import { tr } from 'date-fns/locale';
