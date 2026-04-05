@@ -17,11 +17,6 @@ const ReturnRefundPage = lazy(() => import("./modules/return-refund/pages/Return
 const QuoteCreatorPage = lazy(() => import("./modules/quote-creator/pages/QuoteCreatorPage"));
 const MaasKesintiPage = lazy(() => import("./modules/maas-kesinti/pages/MaasKesintiPage"));
 const MaasKesintiReports = lazy(() => import("./modules/maas-kesinti/pages/MaasKesintiReports"));
-const KolayIzinLogin = lazy(() => import("./modules/kolay-izin/pages/KolayIzinLogin"));
-const KolayIzinEmployee = lazy(() => import("./modules/kolay-izin/pages/KolayIzinEmployee"));
-const KolayIzinAdminLogin = lazy(() => import("./modules/kolay-izin/pages/KolayIzinAdminLogin"));
-const KolayIzinAdmin = lazy(() => import("./modules/kolay-izin/pages/KolayIzinAdmin"));
-const IzinTakipPage = lazy(() => import("./modules/izin-takip/pages/IzinTakipPage"));
 const DisBorcPage = lazy(() => import("./modules/dis-borc/pages/DisBorcPage"));
 const SparePartsPage = lazy(() => import("./modules/spare-parts/pages/SparePartsPage"));
 
