@@ -14,6 +14,7 @@ export default function MaasKesintiReports() {
 
   return (
     <div className="min-h-screen bg-background">
+      <ModuleHeader title="Maaş Kesinti & Ödeme" />
       <Navigation />
       <div className="max-w-7xl mx-auto px-6 py-8">
         <div className="mb-8"><h2 className="text-2xl font-bold text-foreground">Ödeme Geçmişi & Raporlar</h2><p className="text-muted-foreground mt-1">Tamamlanan aylık ödemelerin detaylı raporu</p></div>

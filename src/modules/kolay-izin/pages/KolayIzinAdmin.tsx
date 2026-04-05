@@ -377,6 +377,7 @@ export default function KolayIzinAdmin() {
         </SheetContent>
       </Sheet>
     </div>
+    </>
   );
 }
 

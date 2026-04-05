@@ -52,5 +52,6 @@ export default function KolayIzinAdminLogin() {
         </Button>
       </form>
     </div>
+    </>
   );
 }
