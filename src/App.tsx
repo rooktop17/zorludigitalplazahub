@@ -50,6 +50,7 @@ const App = () => (
             <Route path="/module/kolay-izin/admin" element={<KolayIzinAdmin />} />
             <Route path="/module/izin-takip" element={<IzinTakipPage />} />
             <Route path="/module/dis-borc" element={<DisBorcPage />} />
+            <Route path="/module/spare-parts/*" element={<SparePartsPage />} />
             {/* External modules still use iframe viewer */}
             <Route path="/module/:moduleId" element={<ModuleViewer />} />
             <Route path="*" element={<NotFound />} />
