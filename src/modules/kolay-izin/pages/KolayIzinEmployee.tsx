@@ -187,5 +187,6 @@ export default function KolayIzinEmployee() {
         </div>
       </main>
     </div>
+    </>
   );
 }
