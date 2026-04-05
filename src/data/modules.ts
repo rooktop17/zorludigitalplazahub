@@ -16,6 +16,8 @@ export interface Module {
   icon3d: string;
   url: string;
   category: string;
+  /** If true, module is embedded in this app (not iframe) */
+  embedded?: boolean;
 }
 
 export const modules: Module[] = [
@@ -32,8 +34,9 @@ export const modules: Module[] = [
     title: "Digital Plaza Notes",
     description: "Hızlı not alma ve düzenleme paneli",
     icon3d: iconNotes,
-    url: "https://notkagidi.lovable.app",
+    url: "/module/notes",
     category: "Araçlar",
+    embedded: true,
   },
   {
     id: "izin-takip",
@@ -72,8 +75,9 @@ export const modules: Module[] = [
     title: "Sigorta & Ekspertiz",
     description: "Sigorta ve ekspertiz rapor oluşturma paneli",
     icon3d: iconSigorta,
-    url: "https://sigortaxpertizraporu.lovable.app",
+    url: "/module/sigorta-ekspertiz",
     category: "Operasyon",
+    embedded: true,
   },
   {
     id: "return-refund",
@@ -88,8 +92,9 @@ export const modules: Module[] = [
     title: "Etiket Yazdırma",
     description: "Kargo ve ürün etiketi oluşturma",
     icon3d: iconPrintLabel,
-    url: "https://zlabel.lovable.app",
+    url: "/module/print-label",
     category: "Operasyon",
+    embedded: true,
   },
   {
     id: "dis-borc",
