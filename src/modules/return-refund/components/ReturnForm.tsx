@@ -1,7 +1,8 @@
-import { useState, useRef } from "react";
-import { Printer, Building2, User, FileText, Package, Landmark, Calculator, CheckCircle, Download, Save, List } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Printer, Building2, User, FileText, Package, Landmark, Calculator, CheckCircle, Download, Save, List, Trash2, RefreshCw } from "lucide-react";
 import html2pdf from "html2pdf.js";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import zorluLogo from "@/assets/zorlu-logo-black.png";
 import yetkiliImza from "@/assets/authorized-signature.png";
 import zorluQr from "@/assets/zorlu-qr.jpg";
