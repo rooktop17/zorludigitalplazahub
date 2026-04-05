@@ -1,84 +1,97 @@
 
 
-# Aşama 2: Tüm 10 Modülü Hub'a Taşıma Planı
+# Batch 2 Taşıma Planı: Return Refund, Quote Creator, Maaş Kesinti, Kolay İzin
 
-## Kritik Kısıtlama
+## Analiz Özeti
 
-Her projenin **kendi Supabase veritabanı** var. Lovable'da bir proje sadece **bir Supabase bağlantısı** destekler. Bu projeleri sildiğinizde, o projelere ait Supabase veritabanları da silinir.
+| Modül | Dosya Sayısı | Supabase Tabloları | Veri Depolama |
+|-------|-------------|-------------------|---------------|
+| Return Refund | 1 bileşen + assets | `return_forms` (1 tablo) | Supabase |
+| Quote Creator | 7 bileşen + 1 hook + 1 type + 1 util + assets | `quotes` (1 tablo) | Supabase + localStorage |
+| Maaş Kesinti | 4 bileşen + 2 hook + 2 type + 2 util + assets | `employees`, `advances`, `payments` (3 tablo) | Supabase |
+| Kolay İzin | 4 sayfa + 1 data + 1 store + 1 type + assets | Yok (Edge Function fire-and-forget) | localStorage |
 
-**Çözüm:** Bu hub projesinin Supabase'inde tüm tabloları oluşturup, tüm kodu tek Supabase'e bağlayacağız.
+**Toplam:** ~30 dosya taşınacak, 5 veritabanı tablosu oluşturulacak
 
-## Proje Analizi
+## Uygulama Adımları
 
-| # | Proje | Sayfa | Bileşen | Supabase | Karmaşıklık |
-|---|-------|-------|---------|----------|-------------|
-| 1 | Digital Plaza Notes | 1 | 1 (Notepad) | Yok (localStorage) | Düşük |
-| 2 | Sigorta & Ekspertiz | 1 | 2 (Form+Preview) | Yok | Düşük |
-| 3 | Etiket Yazdırma | 1 | 1 (ShippingLabel) | Yok | Düşük |
-| 4 | Return REFUND | 1 | 1 (ReturnForm) | Var | Orta |
-| 5 | Quote Creator | 1 | quote/ klasörü | Var | Orta |
-| 6 | Maaş Kesinti | 2 | 4 bileşen | Var | Orta |
-| 7 | ZDC Kolay İzin | 4 | Basit (data/store) | Edge Function | Orta |
-| 8 | İzin Takip Paneli | 4 | 10 bileşen | Var (employees, leave) | Yüksek |
-| 9 | Dış Borç Takip | 3 | 7 klasör (auth, dashboard, invoices...) | Var (invoices, payments, suppliers) | Yüksek |
-| 10 | Yedek Parça Hub | 10 | 4 + contexts | Var (company_settings, parts, sales...) | Çok Yüksek |
+### Adım 1: Supabase Bağlantısı ve Veritabanı Tabloları
+Hub projesine Supabase/Lovable Cloud bağlanmalı. Ardından 5 tablo oluşturulacak:
+- `return_forms` — müşteri iade kayıtları
+- `quotes` — teklif formları (rows JSON olarak)
+- `mk_employees` — maaş kesinti çalışanları (prefix ile çakışma önlenir)
+- `mk_advances` — avans kayıtları
+- `mk_payments` — ödeme geçmişi
 
-## Uygulama Planı
+### Adım 2: Dosya Taşıma
 
-### Adım 1: Proje Altyapısı
-- Hub projesine Supabase/Lovable Cloud bağlantısı kurma
-- Tüm 10 modülün tablolarını bu veritabanında oluşturma (migration)
-- Ortak auth sistemi kurma (tek giriş, tüm modüllere erişim)
+Her modül `src/modules/{id}/` altına namespace ile yerleştirilecek:
 
-### Adım 2: Dosya Taşıma (Namespace ile)
-Her modülün dosyaları çakışmaması için namespace yapısı:
 ```text
 src/modules/
-  notes/           → pages/, components/
-  sigorta/         → pages/, components/
-  print-label/     → pages/, components/
-  return-refund/   → pages/, components/
-  quote-creator/   → pages/, components/
-  maas-kesinti/    → pages/, components/
-  kolay-izin/      → pages/, components/, data/
-  izin-takip/      → pages/, components/, types/
-  dis-borc/        → pages/, components/ (auth, dashboard, invoices, payments, reports, suppliers)
-  spare-parts/     → pages/, components/, contexts/
+  return-refund/
+    components/ReturnForm.tsx
+    pages/ReturnRefundPage.tsx
+  quote-creator/
+    components/quote/ (7 dosya: QuoteForm, QuoteHeader, QuoteTable, QuoteSummary, QuoteFooter, QuoteActions, PrintPreview)
+    hooks/useQuoteForm.ts
+    types/quote.ts
+    utils/formatMoney.ts
+    pages/QuoteCreatorPage.tsx
+  maas-kesinti/
+    components/ (Dashboard, EmployeeCard, FlagIcon, Navigation)
+    hooks/ (useEmployees, usePaymentHistory)
+    types/ (employee, payment)
+    utils/ (printPaySlips, printIndividualPaySlip)
+    pages/ (MaasKesinti, MaasKesentiReports)
+  kolay-izin/
+    data/employees.ts
+    lib/store.ts
+    types/leave.ts
+    pages/ (KolayIzinLogin, KolayIzinEmployee, KolayIzinAdmin, KolayIzinAdminLogin)
 ```
 
-### Adım 3: Routing
-Her modül `/module/{id}/*` altında çalışacak:
+Her dosyada:
+- `@/components/ui/*` import'ları → zaten hub'da mevcut, değişiklik yok
+- `@/integrations/supabase/client` → hub'ın tek supabase client'ına yönlendirilecek
+- `@/assets/*` → gerekli görseller (logo, QR, imza) hub'a kopyalanacak
+- Internal import'lar → `@/modules/{id}/...` olarak güncellenecek
+
+### Adım 3: Asset Kopyalama
+- `refund-gentle`: `zorlu-logo.png`, `yetkili-imza.png`, `zorlu-qr.jpg` (zaten hub'da mevcut)
+- `onlinemusteriteklifformu`: `zorlu-logo.jpeg`, `zorlu-qr.png`, `brands/` klasörü
+- `maaskesintiodemepaneli`: `zorlu-logo.png`, `flags/` klasörü
+- `zdp-izintalep`: `logo.png`
+
+### Adım 4: Routing Güncelleme
+`App.tsx`'e yeni lazy route'lar ekleme:
+
 ```text
-/                              → Hub Ana Sayfa
-/module/notes                  → Notes uygulaması
-/module/spare-parts            → Yedek Parça Dashboard
-/module/spare-parts/parts      → Parçalar sayfası
-/module/spare-parts/sales      → Satışlar
-/module/dis-borc               → Dış Borç Ana Sayfa
-/module/dis-borc/auth          → Dış Borç Giriş
-...vb
+/module/return-refund         → ReturnRefundPage
+/module/quote-creator         → QuoteCreatorPage
+/module/maas-kesinti          → MaasKesintiPage
+/module/maas-kesinti/raporlar → MaasKesintiReportsPage
+/module/kolay-izin            → KolayIzinLogin
+/module/kolay-izin/employee   → KolayIzinEmployee
+/module/kolay-izin/panel      → KolayIzinAdminLogin
+/module/kolay-izin/admin      → KolayIzinAdmin
 ```
 
-### Adım 4: Supabase Entegrasyonu
-- Tüm modüller tek `supabase` client kullanacak
-- Her modülün type tanımları birleştirilecek
-- RLS politikaları yeniden oluşturulacak
+### Adım 5: modules.ts Güncelleme
+4 modülü `embedded: true` olarak işaretleme ve URL'leri internal path'lere çevirme.
 
-## Önerilen Uygulama Sırası
+### Adım 6: Bağımlılık Ekleme
+- `html2pdf.js` (Return Refund için)
+- `date-fns` (Kolay İzin için — zaten mevcut olabilir)
 
-**Batch 1 (Basit - Supabase'siz):** Notes, Sigorta, Etiket Yazdırma
-**Batch 2 (Orta):** Return Refund, Quote Creator, Maaş Kesinti, Kolay İzin
-**Batch 3 (Karmaşık):** İzin Takip, Dış Borç Takip, Yedek Parça Hub
+## Kritik Not: Supabase Gereksinimi
+Return Refund, Quote Creator ve Maaş Kesinti modülleri Supabase kullanıyor. Hub'a Supabase bağlanmadan bu modüller yalnızca **form UI** olarak çalışır, veri kaydı yapılamaz. Önce Supabase bağlantısı kurulmalı ve tablolar migrate edilmeli.
 
-## Teknik Detaylar
+Kolay İzin modülü tamamen localStorage tabanlı — hemen çalışır. Edge Function (izin bildirimi) ayrı ayarlanmalı.
 
-- **cross_project--copy_project_asset** ile tüm dosyalar kopyalanacak
-- Her modülün import path'leri `@/modules/{id}/...` olarak güncellenecek
-- Ortak UI bileşenleri (button, input, dialog vb.) zaten hub'da mevcut — tekrar kopyalanmayacak
-- Her modülün kendi `supabase` import'ları `@/integrations/supabase/client` olarak değiştirilecek
-- Toplam ~100+ dosya taşınacak, ~20+ veritabanı tablosu oluşturulacak
-
-## Uyarı
-
-Bu işlem çok büyük. **Tek seferde yapılamaz** — her batch için ayrı bir mesaj/adım gerekecek. Ancak plan onaylandıktan sonra Batch 1 ile hemen başlayabiliriz.
+## Uygulama Sırası
+1. Kolay İzin (Supabase gerektirmez — hemen çalışır)
+2. Return Refund (1 tablo, basit)
+3. Quote Creator (1 tablo, orta)
+4. Maaş Kesinti (3 tablo, en karmaşık)
 
