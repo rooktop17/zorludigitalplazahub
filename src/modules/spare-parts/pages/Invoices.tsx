@@ -30,7 +30,8 @@ const Invoices: React.FC = () => {
 
   const handleSave = async () => {
     try {
-      const { error } = await supabase.from('sp_invoices').insert({ sale_id: form.sale_id || null, customer_name: form.customer_name, customer_address: form.customer_address, customer_tax_id: form.customer_tax_id, subtotal: form.subtotal, tax_amount: form.tax_amount, discount_amount: form.discount_amount, total_amount: form.total_amount, notes: form.notes, status: 'draft' });
+      const { data: { user: currentUser } } = await supabase.auth.getUser();
+      const { error } = await supabase.from('sp_invoices').insert({ sale_id: form.sale_id || null, customer_name: form.customer_name, customer_address: form.customer_address, customer_tax_id: form.customer_tax_id, subtotal: form.subtotal, tax_amount: form.tax_amount, discount_amount: form.discount_amount, total_amount: form.total_amount, notes: form.notes, status: 'draft', user_id: currentUser?.id });
       if (error) throw error;
       toast({ title: t('common.success') }); setDialogOpen(false); fetchInvoices();
     } catch (err: any) { toast({ title: t('common.error'), description: err.message, variant: 'destructive' }); }
