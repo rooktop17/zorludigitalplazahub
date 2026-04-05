@@ -1,7 +1,5 @@
 import iconSpareParts from "@/assets/icons/spare-parts.png";
 import iconNotes from "@/assets/icons/notes.png";
-import iconIzinTakip from "@/assets/icons/izin-takip.png";
-import iconKolayIzin from "@/assets/icons/kolay-izin.png";
 import iconQuoteCreator from "@/assets/icons/quote-creator.png";
 import iconMaasKesinti from "@/assets/icons/maas-kesinti.png";
 import iconSigorta from "@/assets/icons/sigorta.png";
