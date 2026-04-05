@@ -39,11 +39,6 @@ const App = () => (
             <Route path="/module/quote-creator" element={<QuoteCreatorPage />} />
             <Route path="/module/maas-kesinti" element={<MaasKesintiPage />} />
             <Route path="/module/maas-kesinti/raporlar" element={<MaasKesintiReports />} />
-            <Route path="/module/kolay-izin" element={<KolayIzinLogin />} />
-            <Route path="/module/kolay-izin/employee" element={<KolayIzinEmployee />} />
-            <Route path="/module/kolay-izin/panel" element={<KolayIzinAdminLogin />} />
-            <Route path="/module/kolay-izin/admin" element={<KolayIzinAdmin />} />
-            <Route path="/module/izin-takip" element={<IzinTakipPage />} />
             <Route path="/module/dis-borc" element={<DisBorcPage />} />
             <Route path="/module/spare-parts/*" element={<SparePartsPage />} />
             {/* External modules still use iframe viewer */}
