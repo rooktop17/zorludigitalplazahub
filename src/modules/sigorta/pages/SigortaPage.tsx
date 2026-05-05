@@ -94,7 +94,7 @@ const SigortaPage = () => {
             <h2 className="text-lg font-medium text-foreground">Çıktı Önizlemesi (A4 Yatay)</h2>
             <p className="text-sm text-muted-foreground">Bu önizleme yazdırma çıktısını yansıtmaktadır</p>
           </div>
-          <div ref={previewRef}>
+          <div ref={previewRef} className="print-area">
             <InsuranceReportPreview data={reportData} />
           </div>
         </div>
