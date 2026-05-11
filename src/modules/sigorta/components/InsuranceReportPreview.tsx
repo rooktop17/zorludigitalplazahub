@@ -70,38 +70,38 @@ const InsuranceReportPreview = ({ data }: InsuranceReportPreviewProps) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 text-xs">
-          <div className="space-y-2">
-            <div className="bg-muted rounded p-2 border border-border">
-              <h2 className="text-xs font-semibold text-primary uppercase tracking-wide mb-1 border-b border-border pb-1">Müşteri Bilgileri</h2>
-              <div className="space-y-0.5 text-foreground">
-                <div className="flex"><span className="text-muted-foreground w-14 shrink-0">Ad Soyad:</span><span className="font-medium">{data.customerName} {data.customerSurname}</span></div>
-                <div className="flex"><span className="text-muted-foreground w-14 shrink-0">Telefon:</span><span className="font-medium">{data.customerPhone || "—"}</span></div>
-                <div className="flex"><span className="text-muted-foreground w-14 shrink-0">Adres:</span><span className="font-medium line-clamp-1">{data.customerAddress || "—"}</span></div>
+        <div className="grid grid-cols-2 gap-4 text-xs">
+          <div className="space-y-3">
+            <div className="bg-muted rounded p-3 border border-border">
+              <h2 className="text-xs font-semibold text-primary uppercase tracking-wide mb-2 border-b border-border pb-1.5">Müşteri Bilgileri</h2>
+              <div className="space-y-1.5 text-foreground">
+                <div className="flex"><span className="text-muted-foreground w-16 shrink-0">Ad Soyad:</span><span className="font-medium">{data.customerName} {data.customerSurname}</span></div>
+                <div className="flex"><span className="text-muted-foreground w-16 shrink-0">Telefon:</span><span className="font-medium">{data.customerPhone || "—"}</span></div>
+                <div className="flex"><span className="text-muted-foreground w-16 shrink-0">Adres:</span><span className="font-medium line-clamp-2">{data.customerAddress || "—"}</span></div>
               </div>
             </div>
-            <div className="bg-muted rounded p-2 border border-border">
-              <h2 className="text-xs font-semibold text-primary uppercase tracking-wide mb-1 border-b border-border pb-1">Ürün Bilgileri ({data.products.length} Ürün)</h2>
-              <div className="space-y-1 text-foreground max-h-16 overflow-y-auto">
+            <div className="bg-muted rounded p-3 border border-border">
+              <h2 className="text-xs font-semibold text-primary uppercase tracking-wide mb-2 border-b border-border pb-1.5">Ürün Bilgileri ({data.products.length} Ürün)</h2>
+              <div className="space-y-2 text-foreground max-h-24 overflow-y-auto">
                 {data.products.map((product, index) => (
-                  <div key={index} className={index > 0 ? "pt-1 border-t border-border" : ""}>
+                  <div key={index} className={index > 0 ? "pt-2 border-t border-border" : ""}>
                     {data.products.length > 1 && <span className="text-xs text-primary font-medium">Ürün {index + 1}</span>}
-                    <div className="flex"><span className="text-muted-foreground w-14 shrink-0">Marka:</span><span className="font-medium">{product.brand || "—"}</span></div>
-                    <div className="flex"><span className="text-muted-foreground w-14 shrink-0">Model:</span><span className="font-medium">{product.model || "—"}</span></div>
-                    <div className="flex"><span className="text-muted-foreground w-14 shrink-0">Açıklama:</span><span className="font-medium line-clamp-1">{product.description || "—"}</span></div>
+                    <div className="flex"><span className="text-muted-foreground w-16 shrink-0">Marka:</span><span className="font-medium">{product.brand || "—"}</span></div>
+                    <div className="flex"><span className="text-muted-foreground w-16 shrink-0">Model:</span><span className="font-medium">{product.model || "—"}</span></div>
+                    <div className="flex"><span className="text-muted-foreground w-16 shrink-0">Açıklama:</span><span className="font-medium line-clamp-2">{product.description || "—"}</span></div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
 
-          <div className="space-y-2">
-            <div className="bg-muted rounded p-2 border border-border">
-              <h2 className="text-xs font-semibold text-primary uppercase tracking-wide mb-1 border-b border-border pb-1">Arıza Bilgileri</h2>
-              <p className="font-medium leading-relaxed line-clamp-2 text-foreground">{data.defectReason || "Arıza sebebi belirtilmemiş."}</p>
+          <div className="space-y-3">
+            <div className="bg-muted rounded p-3 border border-border">
+              <h2 className="text-xs font-semibold text-primary uppercase tracking-wide mb-2 border-b border-border pb-1.5">Arıza Bilgileri</h2>
+              <p className="font-medium leading-relaxed line-clamp-3 text-foreground">{data.defectReason || "Arıza sebebi belirtilmemiş."}</p>
             </div>
-            <div className={`rounded p-2 border-2 ${data.isRepairable ? "border-green-500 bg-green-50" : "border-amber-500 bg-amber-50"}`}>
-              <h2 className="text-xs font-semibold text-foreground uppercase tracking-wide mb-1 border-b border-border pb-1">
+            <div className={`rounded p-3 border-2 ${data.isRepairable ? "border-green-500 bg-green-50" : "border-amber-500 bg-amber-50"}`}>
+              <h2 className="text-xs font-semibold text-foreground uppercase tracking-wide mb-2 border-b border-border pb-1.5">
                 {data.isRepairable ? "Tamir Bilgileri" : "Değişim Bilgileri"}
               </h2>
               <div className="space-y-0.5 text-foreground">
