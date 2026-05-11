@@ -49,7 +49,7 @@ const formatCurrency = (value: string) => {
 const InsuranceReportPreview = ({ data }: InsuranceReportPreviewProps) => {
   return (
     <div className="bg-card shadow-xl mx-auto" style={{ aspectRatio: "297/210", maxWidth: "900px" }}>
-      <div className="h-full flex flex-col p-5">
+      <div className="h-full flex flex-col p-6 leading-relaxed">
         <div className="flex items-start justify-between border-b-2 border-primary pb-2 mb-2">
           <div className="flex flex-col items-start">
             <div className="flex items-center gap-3">
@@ -70,52 +70,52 @@ const InsuranceReportPreview = ({ data }: InsuranceReportPreviewProps) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 text-xs">
-          <div className="space-y-2">
-            <div className="bg-muted rounded p-2 border border-border">
-              <h2 className="text-xs font-semibold text-primary uppercase tracking-wide mb-1 border-b border-border pb-1">Müşteri Bilgileri</h2>
-              <div className="space-y-0.5 text-foreground">
-                <div className="flex"><span className="text-muted-foreground w-14 shrink-0">Ad Soyad:</span><span className="font-medium">{data.customerName} {data.customerSurname}</span></div>
-                <div className="flex"><span className="text-muted-foreground w-14 shrink-0">Telefon:</span><span className="font-medium">{data.customerPhone || "—"}</span></div>
-                <div className="flex"><span className="text-muted-foreground w-14 shrink-0">Adres:</span><span className="font-medium line-clamp-1">{data.customerAddress || "—"}</span></div>
+        <div className="grid grid-cols-2 gap-4 text-xs">
+          <div className="space-y-3">
+            <div className="bg-muted rounded p-3 border border-border">
+              <h2 className="text-xs font-semibold text-primary uppercase tracking-wide mb-2 border-b border-border pb-1.5">Müşteri Bilgileri</h2>
+              <div className="space-y-1.5 text-foreground">
+                <div className="flex"><span className="text-muted-foreground w-16 shrink-0">Ad Soyad:</span><span className="font-medium">{data.customerName} {data.customerSurname}</span></div>
+                <div className="flex"><span className="text-muted-foreground w-16 shrink-0">Telefon:</span><span className="font-medium">{data.customerPhone || "—"}</span></div>
+                <div className="flex"><span className="text-muted-foreground w-16 shrink-0">Adres:</span><span className="font-medium line-clamp-2">{data.customerAddress || "—"}</span></div>
               </div>
             </div>
-            <div className="bg-muted rounded p-2 border border-border">
-              <h2 className="text-xs font-semibold text-primary uppercase tracking-wide mb-1 border-b border-border pb-1">Ürün Bilgileri ({data.products.length} Ürün)</h2>
-              <div className="space-y-1 text-foreground max-h-16 overflow-y-auto">
+            <div className="bg-muted rounded p-3 border border-border">
+              <h2 className="text-xs font-semibold text-primary uppercase tracking-wide mb-2 border-b border-border pb-1.5">Ürün Bilgileri ({data.products.length} Ürün)</h2>
+              <div className="space-y-2 text-foreground max-h-24 overflow-y-auto">
                 {data.products.map((product, index) => (
-                  <div key={index} className={index > 0 ? "pt-1 border-t border-border" : ""}>
+                  <div key={index} className={index > 0 ? "pt-2 border-t border-border" : ""}>
                     {data.products.length > 1 && <span className="text-xs text-primary font-medium">Ürün {index + 1}</span>}
-                    <div className="flex"><span className="text-muted-foreground w-14 shrink-0">Marka:</span><span className="font-medium">{product.brand || "—"}</span></div>
-                    <div className="flex"><span className="text-muted-foreground w-14 shrink-0">Model:</span><span className="font-medium">{product.model || "—"}</span></div>
-                    <div className="flex"><span className="text-muted-foreground w-14 shrink-0">Açıklama:</span><span className="font-medium line-clamp-1">{product.description || "—"}</span></div>
+                    <div className="flex"><span className="text-muted-foreground w-16 shrink-0">Marka:</span><span className="font-medium">{product.brand || "—"}</span></div>
+                    <div className="flex"><span className="text-muted-foreground w-16 shrink-0">Model:</span><span className="font-medium">{product.model || "—"}</span></div>
+                    <div className="flex"><span className="text-muted-foreground w-16 shrink-0">Açıklama:</span><span className="font-medium line-clamp-2">{product.description || "—"}</span></div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
 
-          <div className="space-y-2">
-            <div className="bg-muted rounded p-2 border border-border">
-              <h2 className="text-xs font-semibold text-primary uppercase tracking-wide mb-1 border-b border-border pb-1">Arıza Bilgileri</h2>
-              <p className="font-medium leading-relaxed line-clamp-2 text-foreground">{data.defectReason || "Arıza sebebi belirtilmemiş."}</p>
+          <div className="space-y-3">
+            <div className="bg-muted rounded p-3 border border-border">
+              <h2 className="text-xs font-semibold text-primary uppercase tracking-wide mb-2 border-b border-border pb-1.5">Arıza Bilgileri</h2>
+              <p className="font-medium leading-relaxed line-clamp-3 text-foreground">{data.defectReason || "Arıza sebebi belirtilmemiş."}</p>
             </div>
-            <div className={`rounded p-2 border-2 ${data.isRepairable ? "border-green-500 bg-green-50" : "border-amber-500 bg-amber-50"}`}>
-              <h2 className="text-xs font-semibold text-foreground uppercase tracking-wide mb-1 border-b border-border pb-1">
+            <div className={`rounded p-3 border-2 ${data.isRepairable ? "border-green-500 bg-green-50" : "border-amber-500 bg-amber-50"}`}>
+              <h2 className="text-xs font-semibold text-foreground uppercase tracking-wide mb-2 border-b border-border pb-1.5">
                 {data.isRepairable ? "Tamir Bilgileri" : "Değişim Bilgileri"}
               </h2>
-              <div className="space-y-0.5 text-foreground">
+              <div className="space-y-1.5 text-foreground">
                 {data.isRepairable ? (
                   <>
                     <div className="flex items-center"><span className="text-muted-foreground w-16 shrink-0">Durum:</span><span className="font-semibold text-green-700">Tamir Edilebilir</span></div>
-                    <div className="max-h-12 overflow-y-auto space-y-0.5">
+                    <div className="max-h-20 overflow-y-auto space-y-1">
                       {data.repairParts.map((part, index) => (
-                        <div key={index} className={index > 0 ? "pt-0.5 border-t border-border" : ""}>
+                        <div key={index} className={index > 0 ? "pt-1 border-t border-border" : ""}>
                           <div className="flex justify-between"><span className="font-medium text-xs">{part.partName || "—"}</span><span className="font-semibold text-green-700 text-xs">{formatCurrency(part.cost)}</span></div>
                         </div>
                       ))}
                     </div>
-                    <div className="flex items-center pt-1 border-t border-border">
+                    <div className="flex items-center pt-1.5 border-t border-border">
                       <span className="text-muted-foreground w-16 shrink-0">Toplam:</span>
                       <span className="font-bold text-sm text-green-700">
                         {formatCurrency(data.repairParts.reduce((sum, part) => sum + (parseFloat(part.cost.replace(",", ".")) || 0), 0).toString())}
