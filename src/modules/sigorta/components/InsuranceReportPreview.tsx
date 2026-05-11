@@ -49,7 +49,7 @@ const formatCurrency = (value: string) => {
 const InsuranceReportPreview = ({ data }: InsuranceReportPreviewProps) => {
   return (
     <div className="bg-card shadow-xl mx-auto" style={{ aspectRatio: "297/210", maxWidth: "900px" }}>
-      <div className="h-full flex flex-col p-5">
+      <div className="h-full flex flex-col p-6 leading-relaxed">
         <div className="flex items-start justify-between border-b-2 border-primary pb-2 mb-2">
           <div className="flex flex-col items-start">
             <div className="flex items-center gap-3">
