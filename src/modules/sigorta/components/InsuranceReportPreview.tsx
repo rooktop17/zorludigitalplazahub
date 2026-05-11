@@ -104,18 +104,18 @@ const InsuranceReportPreview = ({ data }: InsuranceReportPreviewProps) => {
               <h2 className="text-xs font-semibold text-foreground uppercase tracking-wide mb-2 border-b border-border pb-1.5">
                 {data.isRepairable ? "Tamir Bilgileri" : "Değişim Bilgileri"}
               </h2>
-              <div className="space-y-0.5 text-foreground">
+              <div className="space-y-1.5 text-foreground">
                 {data.isRepairable ? (
                   <>
                     <div className="flex items-center"><span className="text-muted-foreground w-16 shrink-0">Durum:</span><span className="font-semibold text-green-700">Tamir Edilebilir</span></div>
-                    <div className="max-h-12 overflow-y-auto space-y-0.5">
+                    <div className="max-h-20 overflow-y-auto space-y-1">
                       {data.repairParts.map((part, index) => (
-                        <div key={index} className={index > 0 ? "pt-0.5 border-t border-border" : ""}>
+                        <div key={index} className={index > 0 ? "pt-1 border-t border-border" : ""}>
                           <div className="flex justify-between"><span className="font-medium text-xs">{part.partName || "—"}</span><span className="font-semibold text-green-700 text-xs">{formatCurrency(part.cost)}</span></div>
                         </div>
                       ))}
                     </div>
-                    <div className="flex items-center pt-1 border-t border-border">
+                    <div className="flex items-center pt-1.5 border-t border-border">
                       <span className="text-muted-foreground w-16 shrink-0">Toplam:</span>
                       <span className="font-bold text-sm text-green-700">
                         {formatCurrency(data.repairParts.reduce((sum, part) => sum + (parseFloat(part.cost.replace(",", ".")) || 0), 0).toString())}
